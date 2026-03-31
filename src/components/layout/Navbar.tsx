@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Volume2, VolumeX } from "lucide-react";
+import { Menu, X, Volume2, VolumeX, Music } from "lucide-react";
+import { useAudio } from "@/components/providers/AudioProvider";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -21,7 +22,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [muted, setMuted] = useState(true);
+  const { muted, toggleMute, trackName } = useAudio();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -88,13 +89,35 @@ export default function Navbar() {
 
           {/* Right buttons */}
           <div className="flex items-center gap-2 md:gap-3">
-            <button
-              onClick={() => setMuted(!muted)}
-              className="text-text-secondary hover:text-neon-cyan transition-colors p-1"
-              aria-label="Toggle sound"
-            >
-              {muted ? <VolumeX className="w-4 h-4 md:w-5 md:h-5" /> : <Volume2 className="w-4 h-4 md:w-5 md:h-5" />}
-            </button>
+            {/* Volume / Now Playing */}
+            <div className="relative group flex items-center">
+              <button
+                onClick={toggleMute}
+                className={`relative p-1.5 rounded-full transition-all duration-300 ${
+                  muted
+                    ? "text-text-secondary hover:text-neon-cyan"
+                    : "text-neon-cyan audio-pulse"
+                }`}
+                aria-label="Toggle background music"
+                title={muted ? "Play epic soundtrack" : `Now playing: ${trackName}`}
+              >
+                {muted ? (
+                  <VolumeX className="w-4 h-4 md:w-5 md:h-5" />
+                ) : (
+                  <Volume2 className="w-4 h-4 md:w-5 md:h-5" />
+                )}
+              </button>
+
+              {/* Now-playing tooltip */}
+              {!muted && trackName && (
+                <div className="absolute top-full right-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+                  <div className="glass rounded-lg px-3 py-2 flex items-center gap-2 whitespace-nowrap border border-neon-cyan/20">
+                    <Music className="w-3 h-3 text-neon-cyan animate-spin" style={{ animationDuration: "3s" }} />
+                    <span className="text-[10px] md:text-xs text-neon-cyan font-medium">{trackName}</span>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <Link href="/games" className="hidden md:inline-flex neon-btn text-[10px] xl:text-xs py-1.5 xl:py-2 px-3 xl:px-4">
               ▶ PLAY GAMES

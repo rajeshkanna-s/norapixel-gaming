@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ParticleCanvas from "@/components/ui/ParticleCanvas";
 import RouteLoader from "@/components/ui/RouteLoader";
+import ClientProviders from "@/components/providers/ClientProviders";
 
 export const metadata: Metadata = {
   title: "NoraPixel | Gaming Content Creator",
@@ -30,12 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen bg-bg-primary text-text-primary font-body antialiased">
-        <ParticleCanvas />
-        <RouteLoader />
-        <div className="grid-bg fixed inset-0 z-0 pointer-events-none opacity-40" />
-        <Navbar />
-        <main className="relative z-10 pt-16">{children}</main>
-        <Footer />
+        <ClientProviders>
+          <ParticleCanvas />
+          <RouteLoader />
+          <div className="grid-bg fixed inset-0 z-0 pointer-events-none opacity-40" />
+          <Navbar />
+          <main className="relative z-10 pt-16">{children}</main>
+          <Footer />
+        </ClientProviders>
       </body>
     </html>
   );

@@ -454,6 +454,13 @@ h1, h2, h3, h4, h5, h6 {
 .card-front, .card-back { backface-visibility: hidden; position: absolute; inset: 0; }
 .card-back { transform: rotateY(180deg); }
 
+/* ── AUDIO PULSE (volume button glow when playing) ── */
+@keyframes audio-pulse {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(0,245,255,0.4)); }
+  50% { filter: drop-shadow(0 0 10px rgba(0,245,255,0.9)) drop-shadow(0 0 20px rgba(0,245,255,0.4)); }
+}
+.audio-pulse { animation: audio-pulse 2s ease-in-out infinite; }
+
 /* ── SELECTION ── */
 ::selection { background: rgba(0,245,255,0.3); color: #fff; }
 
