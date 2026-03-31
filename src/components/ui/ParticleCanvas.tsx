@@ -27,96 +27,66 @@ export default function ParticleCanvas() {
 
     let animationId: number;
     let particles: Particle[] = [];
-    let mouseX = -1000;
-    let mouseY = -1000;
+    let lastTime = 0;
+    const FPS_INTERVAL = 1000 / 30; // Cap at 30 FPS instead of 60
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      createParticles();
     };
 
     const createParticles = () => {
-      const count = Math.min(Math.floor((canvas.width * canvas.height) / 15000), 80);
+      // Fewer particles — max 35 instead of 80
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 40000), 35);
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 2 + 0.5,
-        opacity: Math.random() * 0.5 + 0.2,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: Math.random() * 1.5 + 0.5,
+        opacity: Math.random() * 0.4 + 0.15,
       }));
     };
 
-    const drawParticles = () => {
+    const drawParticles = (timestamp: number) => {
+      animationId = requestAnimationFrame(drawParticles);
+
+      // Throttle to 30 FPS
+      const delta = timestamp - lastTime;
+      if (delta < FPS_INTERVAL) return;
+      lastTime = timestamp - (delta % FPS_INTERVAL);
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach((p, i) => {
-        // Move
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         p.x += p.vx;
         p.y += p.vy;
-
-        // Bounce off edges
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-        // Mouse interaction — particles glow near cursor
-        const dx = p.x - mouseX;
-        const dy = p.y - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const glowFactor = dist < 150 ? 1 - dist / 150 : 0;
-
-        // Draw particle
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius + glowFactor * 2, 0, Math.PI * 2);
-        const alpha = p.opacity + glowFactor * 0.5;
-        ctx.fillStyle = glowFactor > 0
-          ? `rgba(0, 245, 255, ${alpha})`
-          : `rgba(0, 245, 255, ${p.opacity * 0.6})`;
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 245, 255, ${p.opacity * 0.5})`;
         ctx.fill();
-
-        // Draw connections between nearby particles
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const ddx = p.x - p2.x;
-          const ddy = p.y - p2.y;
-          const d = Math.sqrt(ddx * ddx + ddy * ddy);
-          if (d < 120) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(0, 245, 255, ${0.08 * (1 - d / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      });
-
-      animationId = requestAnimationFrame(drawParticles);
+      }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
-
-    const handleMouseLeave = () => {
-      mouseX = -1000;
-      mouseY = -1000;
+    let resizeTimer: NodeJS.Timeout;
+    const debouncedResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 200);
     };
 
     resize();
-    createParticles();
-    drawParticles();
-
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    window.addEventListener("mouseleave", handleMouseLeave);
+    animationId = requestAnimationFrame(drawParticles);
+    window.addEventListener("resize", debouncedResize);
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("resize", debouncedResize);
+      clearTimeout(resizeTimer);
     };
   }, [isClient]);
 
@@ -126,7 +96,7 @@ export default function ParticleCanvas() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 z-0 pointer-events-none"
-      style={{ opacity: 0.6 }}
+      style={{ opacity: 0.5 }}
     />
   );
 }
