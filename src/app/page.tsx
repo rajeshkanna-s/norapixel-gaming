@@ -8,6 +8,7 @@ import InView from "@/components/ui/InView";
 import Marquee from "@/components/ui/Marquee";
 import StatCounter from "@/components/ui/StatCounter";
 import { useEffect, useState } from "react";
+import { useAudio } from "@/components/providers/AudioProvider";
 
 const socials = [
   { icon: Video, href: socialLinks.youtube, color: "hover:text-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]", label: "YouTube" },
@@ -29,6 +30,7 @@ const expertise = [
 ];
 
 export default function HomePage() {
+  const { muted } = useAudio();
   const [subtitle, setSubtitle] = useState("");
   const [mounted, setMounted] = useState(false);
   const fullSubtitle = heroData.subtitle;
@@ -57,14 +59,14 @@ export default function HomePage() {
           {/* Logo */}
           <div className={`mb-4 md:mb-6 transition-all duration-700 ease-out ${mounted ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}>
             <div className="relative inline-block">
-              <Image
-                src="/logo.png"
-                alt="NoraPixel Gaming"
-                width={180}
-                height={180}
-                className="rounded-full mx-auto border-2 border-neon-cyan/40 w-28 h-28 sm:w-36 sm:h-36 md:w-[180px] md:h-[180px]"
+              <video
+                src="/logovideo.mp4"
+                autoPlay
+                loop
+                muted={muted}
+                playsInline
+                className="rounded-full mx-auto border-2 border-neon-cyan/40 w-28 h-28 sm:w-36 sm:h-36 md:w-[180px] md:h-[180px] object-cover"
                 style={{ boxShadow: "0 0 40px rgba(0,245,255,0.25), 0 0 80px rgba(191,0,255,0.1)" }}
-                priority
               />
               <div className="absolute inset-[-6px] md:inset-[-10px] rounded-full border border-neon-cyan/20 animate-rotate-slow" />
               <div className="absolute inset-[-14px] md:inset-[-22px] rounded-full border border-neon-purple/10 animate-rotate-slow" style={{ animationDirection: "reverse", animationDuration: "30s" }} />
@@ -170,11 +172,11 @@ export default function HomePage() {
             <div className="neon-card p-6 md:p-8 text-center lg:sticky lg:top-24">
               <div className="relative inline-block mb-4 md:mb-6">
                 <Image
-                  src="/logo.png"
+                  src="/newlogo.jpg"
                   alt="NoraPixel"
                   width={120}
                   height={120}
-                  className="rounded-full w-20 h-20 md:w-[120px] md:h-[120px] mx-auto"
+                  className="rounded-full w-20 h-20 md:w-[120px] md:h-[120px] mx-auto object-cover"
                   style={{ boxShadow: "var(--glow-cyan)" }}
                 />
                 <div className="absolute inset-[-8px] rounded-full border border-neon-cyan/15 animate-neon-pulse" />

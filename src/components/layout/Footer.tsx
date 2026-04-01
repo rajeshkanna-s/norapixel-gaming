@@ -26,7 +26,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-3 md:mb-4 group">
               <Image
-                src="/logo.png"
+                src="/newlogo.jpg"
                 alt="NoraPixel Gaming"
                 width={28}
                 height={28}

@@ -11,7 +11,7 @@ export default function NotFoundPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center relative z-10">
       <div className={`transition-all duration-700 ${mounted ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}>
-        <Image src="/logo.png" alt="NoraPixel" width={80} height={80} className="rounded-full mx-auto mb-4 w-16 h-16 md:w-20 md:h-20" style={{ boxShadow: "var(--glow-purple)" }} />
+        <Image src="/newlogo.jpg" alt="NoraPixel" width={80} height={80} className="rounded-full mx-auto mb-4 w-16 h-16 md:w-20 md:h-20" style={{ boxShadow: "var(--glow-purple)" }} />
         <h1 className="font-heading text-7xl sm:text-8xl md:text-9xl font-black neon-text mb-4 glitch-hover">
           404
         </h1>

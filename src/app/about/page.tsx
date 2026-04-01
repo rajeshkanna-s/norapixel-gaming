@@ -25,7 +25,7 @@ export default function AboutPage() {
             style={{ boxShadow: "var(--glow-cyan)" }}
           >
             <Image
-              src="/logo.png"
+              src="/newlogo.jpg"
               alt="NoraPixel Gaming"
               width={128}
               height={128}

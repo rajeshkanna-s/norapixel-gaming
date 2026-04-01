@@ -91,7 +91,7 @@ export default function RentPage() {
       {/* CTA */}
       <InView animation="scale">
         <div className="text-center neon-card p-5 md:p-8 animate-shimmer">
-          <Image src="/logo.png" alt="NoraPixel" width={60} height={60} className="rounded-full mx-auto mb-3 w-12 h-12 md:w-[60px] md:h-[60px]" style={{ boxShadow: "var(--glow-cyan)" }} />
+          <Image src="/newlogo.jpg" alt="NoraPixel" width={60} height={60} className="rounded-full mx-auto mb-3 w-12 h-12 md:w-[60px] md:h-[60px]" style={{ boxShadow: "var(--glow-cyan)" }} />
           <h3 className="font-heading text-sm md:text-xl text-neon-cyan mb-2 tracking-wider">WANT TO RENT A GAME?</h3>
           <p className="text-text-secondary font-body mb-4 md:mb-6 max-w-md mx-auto text-xs md:text-base">
             DM us on Instagram to check availability, pricing, and delivery options.

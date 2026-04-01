@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   keywords: ["gaming", "content creator", "YouTube", "esports", "browser games", "NoraPixel"],
   icons: {
     icon: "/favicon.svg",
-    apple: "/logo.png",
+    apple: "/newlogo.jpg",
   },
   openGraph: {
     title: "NoraPixel | Level Up Your Game",

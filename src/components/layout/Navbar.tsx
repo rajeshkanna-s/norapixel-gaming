@@ -53,7 +53,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1.5 md:gap-2 group">
             <Image
-              src="/logo.png"
+              src="/newlogo.jpg"
               alt="NoraPixel Gaming"
               width={40}
               height={40}

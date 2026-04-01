@@ -44,7 +44,7 @@ export default function ContactPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "e01c5152-4ca0-43bc-b72e-4e703ed3b116",
+          access_key: "4eab66cd-1c29-4314-b510-55ca9576e915",
           from_name: "NoraPixel Website",
           subject: `[NoraPixel] ${formData.type} — ${formData.name}`,
           name: formData.name,
@@ -213,7 +213,7 @@ export default function ContactPage() {
           <div className="space-y-3 md:space-y-4">
             {/* Logo card */}
             <div className="neon-card p-5 md:p-6 text-center">
-              <Image src="/logo.png" alt="NoraPixel" width={70} height={70} className="rounded-full mx-auto mb-3 w-14 h-14 md:w-[70px] md:h-[70px]" style={{ boxShadow: "var(--glow-cyan)" }} />
+              <Image src="/newlogo.jpg" alt="NoraPixel" width={70} height={70} className="rounded-full mx-auto mb-3 w-14 h-14 md:w-[70px] md:h-[70px]" style={{ boxShadow: "var(--glow-cyan)" }} />
               <h3 className="font-heading text-xs md:text-sm text-neon-cyan tracking-wider mb-1">NORAPIXEL GAMING</h3>
               <p className="text-text-muted text-[10px] md:text-xs font-body">Content Creator • Gamer • Streamer</p>
             </div>

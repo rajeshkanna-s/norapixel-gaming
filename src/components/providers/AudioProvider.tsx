@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
    Each page gets its own vibe. Pages without an explicit
    mapping fall back to the default epic track.              */
 const ROUTE_TRACKS: Record<string, { src: string; label: string }> = {
-  "/":             { src: "/paulyudin-war-493487.mp3",            label: "War — Paulyudin" },
+  "/":             { src: "",            label: "Logo Soundtrack" },
   "/about":        { src: "/goldensoundlabs-emotional-160374.mp3", label: "Emotional — Golden Sound Labs" },
   "/youtube":      { src: "/nastelbom-epic-501714.mp3",            label: "Epic — Nastelbom" },
   "/instagram":    { src: "/nastelbom-epic-war-383905.mp3",        label: "Epic War — Nastelbom" },
@@ -66,10 +66,17 @@ export default function AudioProvider({ children }: { children: React.ReactNode 
     if (currentSrcRef.current !== src) {
       currentSrcRef.current = src;
       const wasPlaying = !audio.paused;
-      audio.src = src;
-      audio.load();
-      if (wasPlaying) {
-        audio.play().catch(() => {});
+      
+      if (src) {
+        audio.src = src;
+        audio.load();
+        if (wasPlaying) {
+          audio.play().catch(() => {});
+        }
+      } else {
+        audio.pause();
+        audio.removeAttribute("src");
+        audio.load();
       }
     }
   }, [pathname]);
@@ -82,12 +89,16 @@ export default function AudioProvider({ children }: { children: React.ReactNode 
       // First time → load the track for the current route
       if (!hasStartedRef.current) {
         const { src } = getTrackForRoute(pathname);
-        audio.src = src;
         currentSrcRef.current = src;
-        audio.load();
+        if (src) {
+          audio.src = src;
+          audio.load();
+        }
         hasStartedRef.current = true;
       }
-      audio.play().catch(() => {});
+      if (currentSrcRef.current) {
+        audio.play().catch(() => {});
+      }
       setMuted(false);
     } else {
       audio.pause();
