@@ -9,7 +9,6 @@ const ROUTE_TRACKS: Record<string, { src: string; label: string }> = {
   "/":             { src: "",            label: "Logo Soundtrack" },
   "/about":        { src: "/goldensoundlabs-emotional-160374.mp3", label: "Emotional — Golden Sound Labs" },
   "/youtube":      { src: "/nastelbom-epic-501714.mp3",            label: "Epic — Nastelbom" },
-  "/instagram":    { src: "/nastelbom-epic-war-383905.mp3",        label: "Epic War — Nastelbom" },
   "/games":        { src: "/nastelbom-epic-war-383905.mp3",        label: "Epic War — Nastelbom" },
   "/achievements": { src: "/paulyudin-war-493487.mp3",            label: "War — Paulyudin" },
   "/setup":        { src: "/nastelbom-epic-501714.mp3",            label: "Epic — Nastelbom" },

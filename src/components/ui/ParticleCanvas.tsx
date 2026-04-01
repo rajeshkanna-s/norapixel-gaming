@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 interface Particle {
   x: number;
@@ -13,6 +14,7 @@ interface Particle {
 export default function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isClient, setIsClient] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     setIsClient(true);
@@ -28,7 +30,10 @@ export default function ParticleCanvas() {
     let animationId: number;
     let particles: Particle[] = [];
     let lastTime = 0;
-    const FPS_INTERVAL = 1000 / 30; // Cap at 30 FPS instead of 60
+    const FPS_INTERVAL = 1000 / 30;
+
+    // Theme-aware particle color
+    const particleColor = theme === "dark" ? "0, 245, 255" : "0, 151, 167";
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -37,7 +42,6 @@ export default function ParticleCanvas() {
     };
 
     const createParticles = () => {
-      // Fewer particles — max 35 instead of 80
       const count = Math.min(Math.floor((canvas.width * canvas.height) / 40000), 35);
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
@@ -52,7 +56,6 @@ export default function ParticleCanvas() {
     const drawParticles = (timestamp: number) => {
       animationId = requestAnimationFrame(drawParticles);
 
-      // Throttle to 30 FPS
       const delta = timestamp - lastTime;
       if (delta < FPS_INTERVAL) return;
       lastTime = timestamp - (delta % FPS_INTERVAL);
@@ -68,7 +71,7 @@ export default function ParticleCanvas() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 245, 255, ${p.opacity * 0.5})`;
+        ctx.fillStyle = `rgba(${particleColor}, ${p.opacity * (theme === "dark" ? 0.5 : 0.35)})`;
         ctx.fill();
       }
     };
@@ -88,7 +91,7 @@ export default function ParticleCanvas() {
       window.removeEventListener("resize", debouncedResize);
       clearTimeout(resizeTimer);
     };
-  }, [isClient]);
+  }, [isClient, theme]);
 
   if (!isClient) return null;
 
@@ -96,7 +99,7 @@ export default function ParticleCanvas() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 z-0 pointer-events-none"
-      style={{ opacity: 0.5 }}
+      style={{ opacity: theme === "dark" ? 0.5 : 0.35 }}
     />
   );
 }

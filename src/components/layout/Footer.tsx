@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Video, Camera } from "lucide-react";
+import { Video } from "lucide-react";
 import { socialLinks } from "@/data/socialLinks";
 
 const footerLinks = [
@@ -14,12 +14,11 @@ const footerLinks = [
 
 const socials = [
   { icon: Video, href: socialLinks.youtube, label: "YouTube", color: "hover:text-red-500" },
-  { icon: Camera, href: socialLinks.instagram, label: "Instagram", color: "hover:text-pink-500" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-bg-secondary/50 mt-16 md:mt-20">
+    <footer className="border-t border-[var(--t-divider)] bg-bg-secondary/50 mt-16 md:mt-20">
       <div className="max-w-7xl mx-auto px-3 md:px-4 py-8 md:py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Brand */}
@@ -80,7 +79,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-text-muted ${social.color} transition-all p-1.5 md:p-2 rounded bg-bg-card/50 border border-white/5 hover:border-white/20`}
+                  className={`text-text-muted ${social.color} transition-all p-1.5 md:p-2 rounded bg-bg-card/50 border border-[var(--t-border-subtle)] hover:border-[var(--t-border-accent)]`}
                   aria-label={social.label}
                 >
                   <social.icon className="w-4 h-4" />
@@ -91,7 +90,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-neon-cyan/20 to-transparent mb-4 md:mb-6" />
+        <div className="neon-divider w-full mb-4 md:mb-6" />
 
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-text-muted text-[10px] md:text-xs font-mono">

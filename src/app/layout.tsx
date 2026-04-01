@@ -29,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="min-h-screen bg-bg-primary text-text-primary font-body antialiased">
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className="min-h-screen bg-bg-primary text-text-primary font-body antialiased" suppressHydrationWarning>
         <ClientProviders>
           <ParticleCanvas />
           <RouteLoader />

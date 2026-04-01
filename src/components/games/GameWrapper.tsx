@@ -106,7 +106,7 @@ export default function GameWrapper({
         <div className="flex items-center gap-2 md:gap-3 min-w-0">
           <button
             onClick={() => setShowQuit(true)}
-            className="p-1.5 md:p-2 rounded-lg bg-white/5 hover:bg-neon-red/10 border border-white/5 hover:border-neon-red/30 transition-all cursor-pointer flex-shrink-0"
+            className="p-1.5 md:p-2 rounded-lg bg-bg-surface/50 hover:bg-neon-red/10 border border-[var(--t-border-subtle)] hover:border-neon-red/30 transition-all cursor-pointer flex-shrink-0"
             title="Quit Game (Esc)"
           >
             <LogOut className="w-4 h-4 text-text-secondary" />
@@ -137,7 +137,7 @@ export default function GameWrapper({
           {controls && (
             <button
               onClick={() => setShowControls(!showControls)}
-              className="p-1.5 md:p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-all cursor-pointer"
+              className="p-1.5 md:p-2 rounded-lg bg-bg-surface/50 hover:bg-bg-card-hover border border-[var(--t-border-subtle)] transition-all cursor-pointer"
               title="Controls"
             >
               <Info className="w-4 h-4 text-text-secondary" />
@@ -145,14 +145,14 @@ export default function GameWrapper({
           )}
           <button
             onClick={toggleFullscreen}
-            className="p-1.5 md:p-2 rounded-lg bg-white/5 hover:bg-neon-cyan/10 border border-white/5 hover:border-neon-cyan/30 transition-all cursor-pointer"
+            className="p-1.5 md:p-2 rounded-lg bg-bg-surface/50 hover:bg-neon-cyan/10 border border-[var(--t-border-subtle)] hover:border-neon-cyan/30 transition-all cursor-pointer"
             title="Fullscreen"
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4 text-neon-cyan" /> : <Maximize2 className="w-4 h-4 text-text-secondary" />}
           </button>
           <button
             onClick={onRestart}
-            className="p-1.5 md:p-2 rounded-lg bg-white/5 hover:bg-neon-yellow/10 border border-white/5 hover:border-neon-yellow/30 transition-all cursor-pointer"
+            className="p-1.5 md:p-2 rounded-lg bg-bg-surface/50 hover:bg-neon-yellow/10 border border-[var(--t-border-subtle)] hover:border-neon-yellow/30 transition-all cursor-pointer"
             title="Restart"
           >
             <RotateCcw className="w-4 h-4 text-text-secondary" />
@@ -162,20 +162,20 @@ export default function GameWrapper({
 
       {/* ── Stats Bar ── */}
       <div className="flex items-center justify-center gap-3 md:gap-5 mb-3 md:mb-4 text-xs md:text-sm max-w-6xl mx-auto w-full">
-        <div className="flex items-center gap-1.5 font-mono px-3 py-1 rounded-lg bg-white/[0.03] border border-white/5">
+        <div className="flex items-center gap-1.5 font-mono px-3 py-1 rounded-lg bg-bg-surface/30 border border-[var(--t-border-subtle)]">
           <span className="text-text-muted text-[10px] md:text-xs">Score</span>
           <span className="text-neon-cyan font-bold text-sm md:text-lg">{score}</span>
         </div>
-        <div className="flex items-center gap-1.5 font-mono px-3 py-1 rounded-lg bg-white/[0.03] border border-white/5">
+        <div className="flex items-center gap-1.5 font-mono px-3 py-1 rounded-lg bg-bg-surface/30 border border-[var(--t-border-subtle)]">
           <Trophy className="w-3 h-3 md:w-3.5 md:h-3.5 text-neon-yellow" />
           <span className="text-neon-yellow font-bold text-sm md:text-lg">{highScore}</span>
         </div>
         {lives !== undefined && (
-          <div className="flex items-center gap-0.5 px-3 py-1 rounded-lg bg-white/[0.03] border border-white/5">
+          <div className="flex items-center gap-0.5 px-3 py-1 rounded-lg bg-bg-surface/30 border border-[var(--t-border-subtle)]">
             {Array.from({ length: Math.max(lives, 0) }, (_, i) => (
               <Heart key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 text-neon-red fill-neon-red" />
             ))}
-            {lives === 0 && <Heart className="w-3.5 h-3.5 text-white/20" />}
+            {lives === 0 && <Heart className="w-3.5 h-3.5 text-text-muted" />}
           </div>
         )}
       </div>
@@ -188,7 +188,7 @@ export default function GameWrapper({
               <span className="text-neon-cyan text-xs font-heading">🎮 CONTROLS:</span>
               <span className="text-text-secondary text-xs font-body">{controls}</span>
             </div>
-            <button onClick={() => setShowControls(false)} className="p-1 hover:bg-white/10 rounded cursor-pointer">
+            <button onClick={() => setShowControls(false)} className="p-1 hover:bg-bg-card-hover rounded cursor-pointer">
               <X className="w-3 h-3 text-text-muted" />
             </button>
           </div>
@@ -234,15 +234,15 @@ export default function GameWrapper({
               )}
               {/* Stats Summary */}
               <div className="flex gap-4 justify-center mb-4 text-xs font-mono">
-                <div className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+                <div className="px-3 py-1.5 rounded-lg bg-bg-surface/50 border border-[var(--t-border-subtle)]">
                   <div className="text-text-muted">Score</div>
                   <div className="text-neon-cyan font-bold">{score}</div>
                 </div>
-                <div className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+                <div className="px-3 py-1.5 rounded-lg bg-bg-surface/50 border border-[var(--t-border-subtle)]">
                   <div className="text-text-muted">Time</div>
                   <div className="text-neon-green font-bold">{mins}:{secs}</div>
                 </div>
-                <div className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+                <div className="px-3 py-1.5 rounded-lg bg-bg-surface/50 border border-[var(--t-border-subtle)]">
                   <div className="text-text-muted">Best</div>
                   <div className="text-neon-yellow font-bold">{Math.max(highScore, score)}</div>
                 </div>
@@ -268,10 +268,10 @@ export default function GameWrapper({
             <h3 className="font-heading text-lg text-text-primary mb-1">QUIT GAME?</h3>
             <p className="text-text-muted text-xs font-body mb-4">Your current progress will be lost.</p>
             <div className="flex gap-3 justify-center mb-3">
-              <div className="text-xs font-mono px-3 py-1 rounded bg-white/5 border border-white/10">
+              <div className="text-xs font-mono px-3 py-1 rounded bg-bg-surface/50 border border-[var(--t-border-subtle)]">
                 <span className="text-text-muted">Score: </span><span className="text-neon-cyan">{score}</span>
               </div>
-              <div className="text-xs font-mono px-3 py-1 rounded bg-white/5 border border-white/10">
+              <div className="text-xs font-mono px-3 py-1 rounded bg-bg-surface/50 border border-[var(--t-border-subtle)]">
                 <span className="text-text-muted">Time: </span><span className="text-neon-green">{mins}:{secs}</span>
               </div>
             </div>

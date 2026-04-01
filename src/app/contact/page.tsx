@@ -4,13 +4,12 @@ import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
 import InView from "@/components/ui/InView";
 import { socialLinks } from "@/data/socialLinks";
-import { Video, Camera, Mail, Send, ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Video, Mail, Send, ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
 const inquiryTypes = ["Brand Deal", "Sponsorship", "Collaboration", "Fan Message", "Other"];
 
 const socials = [
   { icon: Video, label: "YouTube", handle: "@norapixelgaming", followers: "150K", href: socialLinks.youtube, color: "text-red-500", bg: "bg-red-500/10" },
-  { icon: Camera, label: "Instagram", handle: "@norapixel_gaming", followers: "85K", href: socialLinks.instagram, color: "text-pink-500", bg: "bg-pink-500/10" },
   { icon: Mail, label: "Email", handle: socialLinks.email, followers: "", href: `mailto:${socialLinks.email}`, color: "text-neon-cyan", bg: "bg-neon-cyan/10" },
 ];
 
@@ -200,7 +199,7 @@ export default function ContactPage() {
                 {status === "error" && (
                   <div className="flex items-center gap-2 text-neon-red text-xs font-body p-3 rounded-lg bg-neon-red/5 border border-neon-red/20">
                     <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                    Something went wrong. Please try again or DM on Instagram.
+                    Something went wrong. Please try again or email us directly.
                   </div>
                 )}
               </div>
@@ -248,7 +247,7 @@ export default function ContactPage() {
                 <div>
                   <h4 className="font-heading text-[11px] md:text-xs text-neon-green mb-1 tracking-wider">FASTEST RESPONSE</h4>
                   <p className="text-text-secondary font-body text-[11px] md:text-xs leading-relaxed">
-                    DM on Instagram for quickest replies. Business emails get responded within 48hrs.
+                    Email us for business inquiries. Messages get responded within 48hrs.
                   </p>
                 </div>
               </div>

@@ -42,7 +42,7 @@ export default function RentPage() {
       <div className="grid grid-cols-3 gap-3 md:gap-6 mb-8 md:mb-12">
         {[
           { icon: "📋", title: "1. CHOOSE", desc: "Pick a game from our collection" },
-          { icon: "💬", title: "2. CONTACT", desc: "DM us on Instagram to book" },
+          { icon: "💬", title: "2. CONTACT", desc: "Reach out via our contact page" },
           { icon: "🎮", title: "3. PLAY", desc: "Get the game & start playing!" },
         ].map((step, i) => (
           <InView key={step.title} animation="fade-up" delay={i * 100}>
@@ -76,7 +76,7 @@ export default function RentPage() {
               <div className="flex items-center justify-between">
                 <span className="font-mono text-neon-cyan font-bold text-xs md:text-sm">{game.price}</span>
                 {game.status === "available" ? (
-                  <a href="https://www.instagram.com/norapixel_gaming?igsh=MXh5M2Fnc2w5eDBuZQ%3D%3D" target="_blank" rel="noopener noreferrer" className="arrow-slide flex items-center gap-1 text-[8px] md:text-[10px] font-heading tracking-wider text-neon-purple hover:text-neon-cyan transition-colors">
+                  <a href="/contact" className="arrow-slide flex items-center gap-1 text-[8px] md:text-[10px] font-heading tracking-wider text-neon-purple hover:text-neon-cyan transition-colors">
                     RENT <ArrowRight className="w-3 h-3 arrow-icon" />
                   </a>
                 ) : (
@@ -94,11 +94,11 @@ export default function RentPage() {
           <Image src="/newlogo.jpg" alt="NoraPixel" width={60} height={60} className="rounded-full mx-auto mb-3 w-12 h-12 md:w-[60px] md:h-[60px]" style={{ boxShadow: "var(--glow-cyan)" }} />
           <h3 className="font-heading text-sm md:text-xl text-neon-cyan mb-2 tracking-wider">WANT TO RENT A GAME?</h3>
           <p className="text-text-secondary font-body mb-4 md:mb-6 max-w-md mx-auto text-xs md:text-base">
-            DM us on Instagram to check availability, pricing, and delivery options.
+            Contact us to check availability, pricing, and delivery options.
           </p>
-          <a href="https://www.instagram.com/norapixel_gaming?igsh=MXh5M2Fnc2w5eDBuZQ%3D%3D" target="_blank" rel="noopener noreferrer">
+          <a href="/contact">
             <NeonButton variant="cyan" size="md" className="arrow-slide inline-flex items-center gap-2">
-              📩 DM ON INSTAGRAM <ArrowRight className="w-4 h-4 arrow-icon" />
+              📩 CONTACT US <ArrowRight className="w-4 h-4 arrow-icon" />
             </NeonButton>
           </a>
         </div>

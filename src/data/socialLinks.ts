@@ -1,6 +1,5 @@
 export const socialLinks = {
   youtube: "https://youtube.com/@norapixelgaming",
-  instagram: "https://www.instagram.com/norapixel_gaming?igsh=MXh5M2Fnc2w5eDBuZQ%3D%3D",
   email: "naveenkumaranandhan5@gmail.com"
 };
 

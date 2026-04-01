@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Video, Camera, ChevronDown, ArrowRight, Gamepad2, Trophy, Zap, Clock } from "lucide-react";
+import { Video, ChevronDown, ArrowRight, Gamepad2, Trophy, Zap, Clock } from "lucide-react";
 import { heroData, socialLinks } from "@/data/socialLinks";
 import NeonButton from "@/components/ui/NeonButton";
 import InView from "@/components/ui/InView";
@@ -12,7 +12,6 @@ import { useAudio } from "@/components/providers/AudioProvider";
 
 const socials = [
   { icon: Video, href: socialLinks.youtube, color: "hover:text-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]", label: "YouTube" },
-  { icon: Camera, href: socialLinks.instagram, color: "hover:text-pink-500 hover:shadow-[0_0_15px_rgba(236,72,153,0.5)]", label: "Instagram" },
 ];
 
 const marqueeGames = [
@@ -66,7 +65,7 @@ export default function HomePage() {
                 muted={muted}
                 playsInline
                 className="rounded-full mx-auto border-2 border-neon-cyan/40 w-28 h-28 sm:w-36 sm:h-36 md:w-[180px] md:h-[180px] object-cover"
-                style={{ boxShadow: "0 0 40px rgba(0,245,255,0.25), 0 0 80px rgba(191,0,255,0.1)" }}
+                style={{ boxShadow: "0 0 40px rgba(var(--t-particle-color),0.25), 0 0 80px rgba(var(--t-particle-color),0.08)" }}
               />
               <div className="absolute inset-[-6px] md:inset-[-10px] rounded-full border border-neon-cyan/20 animate-rotate-slow" />
               <div className="absolute inset-[-14px] md:inset-[-22px] rounded-full border border-neon-purple/10 animate-rotate-slow" style={{ animationDirection: "reverse", animationDuration: "30s" }} />
@@ -113,7 +112,7 @@ export default function HomePage() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-text-muted ${social.color} transition-all duration-200 rounded-full p-2.5 md:p-3 bg-bg-card/60 border border-white/5 hover:border-white/20 hover:scale-110 hover:-translate-y-0.5 backdrop-blur-sm`}
+                className={`text-text-muted ${social.color} transition-all duration-200 rounded-full p-2.5 md:p-3 bg-bg-card/60 border border-[var(--t-border-subtle)] hover:border-[var(--t-border-accent)] hover:scale-110 hover:-translate-y-0.5 backdrop-blur-sm`}
                 aria-label={social.label}
               >
                 <social.icon className="w-5 h-5 md:w-6 md:h-6" />
@@ -129,7 +128,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ MARQUEE ═══ */}
-      <section className="py-6 md:py-8 border-y border-white/5 relative z-10">
+      <section className="py-6 md:py-8 border-y border-[var(--t-divider)] relative z-10">
         <Marquee items={marqueeGames} speed={35} />
       </section>
 
@@ -148,7 +147,7 @@ export default function HomePage() {
           <div className="space-y-0">
             {expertise.map((item, i) => (
               <InView key={item.num} animation="fade-left" delay={i * 100}>
-                <div className="group border-b border-white/5 py-4 md:py-6 hover:bg-white/[0.02] px-3 md:px-4 rounded-lg transition-all duration-200 cursor-default">
+                <div className="group border-b border-[var(--t-divider)] py-4 md:py-6 hover:bg-[var(--t-bg-card-hover)]/30 px-3 md:px-4 rounded-lg transition-all duration-200 cursor-default">
                   <div className="flex items-start gap-3 md:gap-5">
                     <span className="font-mono text-xs md:text-sm text-text-muted/40 mt-1">{item.num}</span>
                     <div className="flex-1">
@@ -194,7 +193,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ STATS SECTION (Indium-inspired counters) ═══ */}
-      <section className="relative z-10 border-y border-white/5">
+      <section className="relative z-10 border-y border-[var(--t-divider)]">
         <div className="max-w-7xl mx-auto px-3 md:px-4 py-12 md:py-20">
           <InView animation="fade-up">
             <div className="text-center mb-8 md:mb-12">
@@ -228,7 +227,6 @@ export default function HomePage() {
             { icon: "🎮", title: "Play Games", desc: "27+ browser games", href: "/games", color: "from-neon-cyan/10 to-neon-purple/10" },
             { icon: "🕹️", title: "Rent Games", desc: "Premium titles", href: "/rent", color: "from-neon-green/10 to-neon-cyan/10" },
             { icon: "📺", title: "Watch Videos", desc: "Latest drops", href: "/youtube", color: "from-red-500/10 to-neon-orange/10" },
-            { icon: "📸", title: "Instagram", desc: "Behind the scenes", href: "/instagram", color: "from-pink-500/10 to-neon-purple/10" },
           ].map((card, i) => (
             <InView key={card.title} animation="scale" delay={i * 80}>
               <Link href={card.href}>
@@ -245,7 +243,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ BOTTOM MARQUEE ═══ */}
-      <section className="py-4 md:py-6 border-t border-white/5 relative z-10">
+      <section className="py-4 md:py-6 border-t border-[var(--t-divider)] relative z-10">
         <Marquee items={["Content Creator", "Gamer", "Streamer", "Reviewer", "Esports", "Community Builder"]} speed={40} separator="◆" />
       </section>
     </>

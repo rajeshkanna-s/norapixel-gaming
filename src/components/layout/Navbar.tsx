@@ -3,14 +3,14 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Volume2, VolumeX, Music } from "lucide-react";
+import { Menu, X, Volume2, VolumeX, Music, Sun, Moon } from "lucide-react";
 import { useAudio } from "@/components/providers/AudioProvider";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/youtube", label: "YouTube" },
-  { href: "/instagram", label: "Instagram" },
   { href: "/games", label: "Games" },
   { href: "/achievements", label: "Achievements" },
   { href: "/setup", label: "Setup" },
@@ -23,6 +23,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { muted, toggleMute, trackName } = useAudio();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -45,7 +46,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
           scrolled
-            ? "glass py-1.5 md:py-2 shadow-[0_1px_0_rgba(0,245,255,0.15),0_4px_30px_rgba(0,0,0,0.4)]"
+            ? "glass py-1.5 md:py-2 shadow-[0_1px_0_var(--t-border-accent),0_4px_30px_rgba(0,0,0,0.15)]"
             : "bg-transparent py-2.5 md:py-4"
         }`}
       >
@@ -57,7 +58,7 @@ export default function Navbar() {
               alt="NoraPixel Gaming"
               width={40}
               height={40}
-              className="rounded-full group-hover:drop-shadow-[0_0_10px_rgba(0,245,255,0.8)] transition-all w-8 h-8 md:w-10 md:h-10"
+              className="rounded-full group-hover:drop-shadow-[0_0_10px_rgba(var(--t-particle-color),0.6)] transition-all w-8 h-8 md:w-10 md:h-10"
             />
             <span className="font-heading text-sm md:text-xl font-bold text-neon-cyan glitch-hover tracking-wider">
               NORAPIXEL
@@ -80,7 +81,7 @@ export default function Navbar() {
                 {pathname === link.href && (
                   <span
                     className="absolute bottom-0 left-1/4 right-1/4 h-0.5 bg-neon-cyan rounded-full animate-scale-in"
-                    style={{ boxShadow: "0 0 10px rgba(0,245,255,0.5)" }}
+                    style={{ boxShadow: `0 0 10px rgba(var(--t-particle-color), 0.4)` }}
                   />
                 )}
               </Link>
@@ -89,6 +90,20 @@ export default function Navbar() {
 
           {/* Right buttons */}
           <div className="flex items-center gap-2 md:gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="relative p-1.5 rounded-full transition-all duration-300 text-text-secondary hover:text-neon-cyan hover:bg-bg-card/50"
+              aria-label="Toggle theme"
+              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === "dark" ? (
+                <Sun className="w-4 h-4 md:w-5 md:h-5" />
+              ) : (
+                <Moon className="w-4 h-4 md:w-5 md:h-5" />
+              )}
+            </button>
+
             {/* Volume / Now Playing */}
             <div className="relative group flex items-center">
               <button
@@ -142,7 +157,7 @@ export default function Navbar() {
         }`}
       >
         <div className={`flex flex-col items-center gap-5 transition-transform duration-200 ${isOpen ? "scale-100" : "scale-95"}`}>
-          {navLinks.map((link, i) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
